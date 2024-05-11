@@ -30,7 +30,7 @@ const ArtPage = () => {
         </InformationLayoutContainer>
         <ContainerV2>
           <ArtMainContainer>
-            <ArtImageBox src="\images\bridal\2.jpeg" />
+            <ArtImageBox src="images/Mehndi_latest/Bridal_hand/Bridal_hand_6.jpg" />
           </ArtMainContainer>
           <InformationLayoutContainer
             sx={{ gap: 4, alignItems: "start", maxWidth: 614, mx: "auto" }}
@@ -63,7 +63,11 @@ const ArtPage = () => {
                 </Box>
               </Box>
             </ArtContainer>
-            <Box component="img" src="\images\bridal\2.jpeg" width="100%" />
+            <Box
+              component="img"
+              src="images\Mehndi_latest\Bridal_hand\Bridal_hand_14.jpg"
+              width="100%"
+            />
 
             <ArtContainer>
               <UINewTypography variant="SubtitleLargeBold" align="left">
