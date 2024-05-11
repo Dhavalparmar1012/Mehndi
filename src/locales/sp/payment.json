@@ -1,0 +1,14 @@
+{
+  "PaymentSuccessful": "Pago exitoso",
+  "PaymentUnsuccessful": "Pago fallido",
+  "SuccessfullyPurchased": "Has comprado con éxito",
+  "Package": "Paquete",
+  "CheckEmail": "Por favor revise su correo electrónico registrado para obtener más información sobre los detalles de su paquete y la factura",
+  "ThankYouBeingWithUs": "Gracias por estar con nosotros",
+  "BackToProfile": "Volver a tu perfil",
+  "ContactSupportTeam": " Póngase en contacto con el equipo de soporte",
+  "BackToYourProfile":"Volver a tu perfil",
+  "TryAgain": "Intentar otra vez",
+  "CreditMessage": "Ha comprado crédito con éxito. Consulte su correo electrónico registrado para obtener más información sobre los detalles de su crédito y su factura. Gracias por estar con nosotros.",
+  "FailPaymentContent": "Lamentamos informarle que esta vez su pago no se realizó correctamente. Revise sus datos, método de pago o comuníquese con el soporte para obtener ayuda. Estamos aquí para ayudarle a completar su pago."
+}

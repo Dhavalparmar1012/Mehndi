@@ -1,0 +1,436 @@
+import { PaletteColorOptions, createTheme } from "@mui/material/styles";
+import { Roboto } from "next/font/google";
+import { CSSProperties } from "react";
+
+declare module "@mui/material/styles" {
+  interface PaletteOptions {
+    white?: PaletteColorOptions;
+    black?: PaletteColorOptions;
+  }
+
+  interface PaletteColor {
+    100: string;
+    200: string;
+    800: string;
+    700: string;
+    500: string;
+    400: string;
+    600: string;
+  }
+
+  interface SimplePaletteColorOptions {
+    100?: string;
+    200?: string;
+    800?: string;
+    700?: string;
+    500?: string;
+    400?: string;
+  }
+
+  interface TypographyVariants {
+    button: CSSProperties;
+    subtitle: CSSProperties;
+    captionLarge: CSSProperties;
+    captionLargeSemiBold: CSSProperties;
+    body: CSSProperties;
+    bodySmall: CSSProperties;
+    bodySmallBold: CSSProperties;
+    bodyLight: CSSProperties;
+    bodyLargeBold: CSSProperties;
+    bodyBold: CSSProperties;
+    bodyLarge: CSSProperties;
+    bodyUltraLarge: CSSProperties;
+    SubtitleSmallMedium: CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    button?: CSSProperties;
+    subtitle?: CSSProperties;
+    captionLarge?: CSSProperties;
+    captionLargeSemiBold?: CSSProperties;
+    body?: CSSProperties;
+    bodySmall?: CSSProperties;
+    bodySmallBold?: CSSProperties;
+    bodyLight?: CSSProperties;
+    bodyLargeBold?: CSSProperties;
+    bodyBold?: CSSProperties;
+    bodyLarge?: CSSProperties;
+    bodyUltraLarge?: CSSProperties;
+    buttonLargeMenu?: CSSProperties;
+    bodySemiBold?: CSSProperties;
+    SubtitleSmallRegular?: CSSProperties;
+    captionBold?: CSSProperties;
+    buttonSmallBold?: CSSProperties;
+    bodyRegular?: CSSProperties;
+    buttonLargeBold?: CSSProperties;
+    SubtitleLargeBold?: CSSProperties;
+    subtitleLargeRegular?: CSSProperties;
+    SubtitleSmallMedium?: CSSProperties;
+    TypographyAttract?: CSSProperties;
+    TypographyPercentage?: CSSProperties;
+    SmallerText?: CSSProperties;
+    ExtraSmallerText?: CSSProperties;
+    MediumBold?: CSSProperties;
+    SmallText?: CSSProperties;
+    captionLargeBold?: CSSProperties;
+  }
+}
+
+// Update the Typography's variant prop options
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    button: true;
+    subtitle: true;
+    captionLarge: true;
+    captionLargeSemiBold: true;
+    body: true;
+    bodySmall: true;
+    bodySmallBold: true;
+    bodyLight: true;
+    bodyLargeBold: true;
+    bodyBold: true;
+    bodyLarge: true;
+    bodyUltraLarge: true;
+    buttonLargeMenu: true;
+    bodySemiBold: true;
+    SubtitleSmallRegular: true;
+    captionBold: true;
+    buttonSmallBold: true;
+    bodyRegular: true;
+    buttonLargeBold: true;
+    SubtitleLargeBold: true;
+    subtitleLargeRegular: true;
+    SubtitleSmallMedium: true;
+    TypographyAttract: true;
+    SmallerText: true;
+    ExtraSmallerText: true;
+    MediumBold: true;
+    SmallText: true;
+    captionLargeBold: true;
+    TypographyPercentage: true;
+  }
+}
+
+export const roboto = Roboto({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  fallback: ["Helvetica", "Arial", "sans-serif"],
+});
+
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    white: true;
+    black: true;
+  }
+}
+
+declare module "@mui/material/Chip" {
+  interface ChipPropsColorOverrides {
+    white: true;
+    black: true;
+  }
+}
+
+const theme = createTheme({
+  palette: {
+    mode: "light",
+    text: {
+      primary: "#B7B5B9",
+      secondary: "#E9E8EB",
+      disabled: "#58535E",
+    },
+    primary: {
+      100: "#D12288",
+      200: "#290F1E",
+      900: "#E92F2F",
+      500: "#611441",
+      700: "#232027",
+      800: "#D12288",
+      400: "#FF68C0",
+      300: "#FF0000",
+      600: "#FFE500",
+      main: "#FF48B3",
+    },
+    error: {
+      // 100: "rgba(255, 37, 37, 0.15)",
+      300: "#FF5959",
+      main: "#FF2525",
+    },
+    success: {
+      main: "#079C46",
+      100: "#79E028",
+      // 300: "rgba(7, 156, 70, 0.30)",
+    },
+    secondary: {
+      main: "#290F1E",
+      light: "#58535E",
+      dark: "#1E0815",
+      // light: "#e7e7e7",
+      800: "#232027",
+      200: "#B7B5B9",
+      500: "#100B19",
+      700: "#86838A",
+    },
+
+    white: {
+      main: "#fff",
+    },
+    black: {
+      main: "#000",
+    },
+    background: {
+      paper: "#000",
+      default: "#000",
+    },
+    warning: {
+      main: "#A98F00",
+      light: "#ECC700",
+      300: "rgba(254, 168, 50, 0.3)",
+    },
+    info: {
+      main: "#57ADDD",
+      300: "rgba(87, 173, 221, 0.3)",
+    },
+  },
+  typography: {
+    fontFamily: "'Manrope', sans-serif",
+    h1: {
+      fontSize: "48px",
+      fontWeight: 700,
+      lineHeight: "125%",
+      fontFamily: "Manrope",
+      letterSpacing: "-0.5px",
+    },
+    h2: {
+      fontSize: "38px",
+      fontStyle: "normal",
+      fontWeight: 700,
+      lineHeight: "125%",
+      fontFamily: "Manrope",
+    },
+    h3: {
+      fontSize: "30px",
+      fontStyle: "normal",
+      fontWeight: 600,
+      lineHeight: "140%",
+      fontFamily: "Manrope",
+      letterSpacing: "-0.5px",
+    },
+    h4: {
+      fontSize: "31px",
+      fontStyle: "normal",
+      fontWeight: 600,
+      lineHeight: "120%",
+      fontFamily: "Manrope",
+    },
+    h5: {
+      fontSize: "24px",
+      fontStyle: "normal",
+      fontWeight: 700,
+      lineHeight: "140%",
+      fontFamily: "Manrope",
+      letterSpacing: "0.5px",
+    },
+    h6: {
+      fontSize: "20px",
+      fontStyle: "normal",
+      fontWeight: 700,
+      lineHeight: "140%",
+      fontFamily: "Manrope",
+    },
+    subtitle: {
+      fontSize: "20px",
+      fontWeight: 500,
+      lineHeight: "120%",
+      fontFamily: "Manrope",
+    },
+    subtitleLargeRegular: {
+      fontSize: "18px",
+      fontWeight: 400,
+      lineHeight: "160%",
+      letterSpacing: "0.3px",
+    },
+    bodyLargeBold: {
+      fontSize: "18px",
+      fontWeight: 500,
+      lineHeight: "120%",
+    },
+    bodyLarge: {
+      fontSize: "18px",
+      fontWeight: 400,
+      lineHeight: "120%",
+    },
+    bodyBold: {
+      fontSize: "18px",
+      fontWeight: 600,
+      lineHeight: "19.2px",
+    },
+    body: {
+      fontSize: "16px",
+      lineHeight: "120%",
+      fontStyle: "normal",
+      fontWeight: 700,
+      textTransform: "none",
+    },
+    buttonSmallBold: {
+      fontSize: "14px",
+      lineHeight: "120%",
+      fontStyle: "normal",
+      fontWeight: 700,
+      textTransform: "none",
+    },
+    buttonLargeBold: {
+      fontSize: "16px",
+      lineHeight: "120%",
+      fontStyle: "normal",
+      fontWeight: 700,
+      fontFamily: "Manrope",
+    },
+    bodyRegular: {
+      fontSize: "16px",
+      lineHeight: "160%",
+      fontWeight: 400,
+      fontStyle: "normal",
+      letterSpacing: "0.1px",
+    },
+    body1: {
+      fontSize: "16px",
+      lineHeight: "150%",
+      fontWeight: 400,
+      fontStyle: "normal",
+    },
+    bodyLight: {
+      fontSize: "16px",
+      lineHeight: "120%",
+      fontWeight: 400,
+    },
+    bodySmallBold: {
+      fontSize: "14px",
+      fontWeight: 600,
+      lineHeight: "120%",
+    },
+    bodySemiBold: {
+      fontSize: "16px",
+      fontWeight: 600,
+      lineHeight: "160%",
+      fontFamily: "Manrope",
+      fontStyle: "normal",
+    },
+    bodySmall: {
+      fontSize: "14px",
+      fontWeight: 400,
+      lineHeight: "120%",
+    },
+    SubtitleSmallRegular: {
+      fontSize: "14px",
+      fontStyle: "normal",
+      letterSpacing: "0.3px",
+      fontFamily: "Manrope",
+      fontWeight: 400,
+      lineHeight: "140%",
+    },
+    SubtitleLargeBold: {
+      fontSize: "18px",
+      fontStyle: "normal",
+      fontWeight: 700,
+      lineHeight: "150%",
+    },
+    caption: {
+      fontSize: "13px",
+      fontStyle: "normal",
+      fontWeight: 400,
+      lineHeight: "18.2px%",
+    },
+    captionBold: {
+      fontSize: "13px",
+      fontWeight: 800,
+      lineHeight: "140%",
+      fontStyle: "normal",
+      textTransform: "uppercase",
+    },
+    button: {
+      fontSize: "20px",
+      fontWeight: 700,
+      lineHeight: "120%",
+      fontStyle: "normal",
+      textTransform: "none",
+    },
+    buttonLargeMenu: {
+      fontSize: "16px",
+      fontWeight: 500,
+      lineHeight: "120%",
+      fontStyle: "normal",
+      fontFamily: "Manrope",
+    },
+    captionLarge: {
+      fontSize: "12px",
+      fontWeight: 500,
+      lineHeight: "120%",
+    },
+    captionLargeBold: {
+      fontSize: "12px",
+      fontWeight: 400,
+      lineHeight: "140%",
+    },
+    captionLargeSemiBold: {
+      fontSize: "12px",
+      fontWeight: 600,
+      lineHeight: "120%",
+    },
+    bodyUltraLarge: {
+      fontSize: "14px",
+      fontWeight: 600,
+      lineHeight: "120%",
+    },
+    SubtitleSmallMedium: {
+      fontSize: "14px",
+      fontWeight: 500,
+      lineHeight: "140%",
+      fontStyle: "normal",
+      fontFamily: "Manrope",
+      letterSpacing: "0.3px",
+    },
+    TypographyAttract: {
+      fontSize: "96px",
+      fontWeight: 300,
+      lineHeight: "110%",
+      fontStyle: "normal",
+      fontFamily: "Manrope",
+    },
+    TypographyPercentage: {
+      fontFamily: "Manrope",
+      fontSize: "40px",
+      fontWeight: 300,
+      lineHeight: "110%",
+    },
+    SmallerText: {
+      fontFamily: "Manrope",
+      fontSize: "10px",
+      fontWeight: 800,
+      lineHeight: "14px",
+    },
+    ExtraSmallerText: {
+      fontFamily: "Manrope",
+      fontSize: "10px",
+      fontWeight: 600,
+      lineHeight: "14px",
+    },
+    MediumBold: {
+      fontFamily: "Manrope",
+      fontSize: "28px",
+      fontWeight: 800,
+      lineHeight: "32px",
+      textTransform: "uppercase",
+    },
+    SmallText: {
+      fontFamily: "Manrope",
+      fontSize: "11px",
+      fontWeight: 500,
+      lineHeight: "16px",
+    },
+  },
+});
+
+export default theme;
