@@ -8,7 +8,7 @@ const SEOLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   const pageTitle = getHeaderData(
-    router.locale,
+    // router.locale,
     router.pathname,
     router.query,
     router.asPath,

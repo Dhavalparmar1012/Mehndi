@@ -3,10 +3,6 @@ import Typography from "@mui/material/Typography";
 import React, { Component } from "react";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
 import StyleButton from "../UIComponent/StyleButton/index";
-import {
-  LanguageContext,
-  LanguageContextType,
-} from "../../../context/LanguageContext";
 import { JSON_TYPES } from "@/constants/jsonConstants";
 
 interface ErrorBoundaryProps {
@@ -28,8 +24,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   render() {
-    const { t } = this.context as LanguageContextType;
-
     if (this.state.hasError) {
       return (
         <Box
@@ -44,14 +38,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         >
           <ErrorRoundedIcon sx={{ fontSize: 60 }} />
           <br />
-          <Typography variant="h3">{t(JSON_TYPES.COMMON, "OOPS")}!</Typography>
+          <Typography variant="h3">OOPS !</Typography>
           <br />
           <Typography variant="h3">
-            {t(JSON_TYPES.COMMON, "SorrySomethingWentWrong")}. &nbsp;
+            Sorry, Something went wrong. &nbsp;
           </Typography>
           <br />
           <StyleButton variant="contained" href="/">
-            {t(JSON_TYPES.COMMON, "BackToHome")}
+            Back to home
           </StyleButton>
         </Box>
       );
@@ -60,7 +54,5 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     return this.props.children;
   }
 }
-
-ErrorBoundary.contextType = LanguageContext;
 
 export default ErrorBoundary;
