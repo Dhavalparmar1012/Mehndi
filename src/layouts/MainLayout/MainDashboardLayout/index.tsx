@@ -5,6 +5,7 @@ import RegionChecker from "@/layouts/RegionChecker";
 import GenericLayout from "@/layouts/GenericLayout";
 import Navbar from "./Navbar/Navbar";
 import Loader from "@/components/common/ProgressBar";
+import Footer from "./Footer";
 
 export type MainLayoutType = {
   children: ReactNode;
@@ -49,13 +50,7 @@ const MainLayout = (props: MainLayoutType) => {
         <RegionChecker>
           <>{props.children}</>
         </RegionChecker>
-
-        <Box
-          component="img"
-          src="//tsyndicate.com/api/v2/cpa/101919/pixel.gif"
-          alt=""
-          sx={{ height: "0px" }}
-        />
+        <Footer />
       </Box>
     </GenericLayout>
   );

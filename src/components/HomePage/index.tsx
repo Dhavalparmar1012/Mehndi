@@ -11,12 +11,15 @@ import MainLayout from "@/layouts/MainLayout/MainDashboardLayout";
 import Scrollbars from "react-custom-scrollbars-2";
 import ContainerV2 from "../UIComponent/ContainerV2";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import CallIcon from "@mui/icons-material/Call";
 import HomeIcon from "@mui/icons-material/Home";
 import Link from "next/link";
-import CallIcon from "@mui/icons-material/Call";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import { Typography } from "@mui/material";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/bundle";
 
 const HomePage = () => {
   const images = [
@@ -148,45 +151,73 @@ const HomePage = () => {
                 </Grid>
               </Grid>
 
-              <Swiper
-                spaceBetween={8}
-                slidesPerView={1}
-                style={{
+              <Box
+                sx={{
                   width: "100%",
-                  height: "auto",
-                }}
-                breakpoints={{
-                  640: {
-                    slidesPerView: 2,
-                  },
-                  768: {
-                    slidesPerView: 3,
-                  },
-                  1024: {
-                    slidesPerView: 4,
+                  height: { xs: "410px" },
+                  overflow: "hidden",
+                  "& .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet":
+                    {
+                      width: "8px",
+                      height: "5px",
+                      background: "#FF68C0",
+                      borderRadius: "16px",
+                    },
+                  "& .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet-active":
+                    {
+                      background: "#FF68C0",
+                      width: "32px",
+                      height: "4px",
+                      borderRadius: "16px",
+                    },
+                  "& .swiper-pagination-bullets.swiper-pagination-horizontal": {
+                    bottom: "-8px",
                   },
                 }}
               >
-                {images.map((image, index) => (
-                  <SwiperSlide key={index}>
-                    <Box
-                      component="img"
-                      src={image}
-                      alt={`Mehndi ${index}`}
-                      sx={{
-                        width: "100%",
-                        height: "100%",
-                        maxHeight: {
-                          xs: "400px",
-                          sm: "400px",
-                          md: "400px",
-                          lg: "400px",
-                        },
-                      }}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+                <Swiper
+                  spaceBetween={8}
+                  loop={true}
+                  pagination={true}
+                  modules={[Pagination]}
+                  slidesPerView={1}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
+                    },
+                    768: {
+                      slidesPerView: 3,
+                    },
+                    1024: {
+                      slidesPerView: 4,
+                    },
+                  }}
+                >
+                  {images.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <Box
+                        component="img"
+                        src={image}
+                        alt={`Mehndi ${index}`}
+                        sx={{
+                          width: "100%",
+                          height: "100%",
+                          maxHeight: {
+                            xs: "400px",
+                            sm: "400px",
+                            md: "400px",
+                            lg: "400px",
+                          },
+                        }}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </Box>
 
               <Box
                 sx={{
@@ -340,47 +371,6 @@ const HomePage = () => {
                     </Link>
                   </ContactTitle>
                 </ContactCallIcon>
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: 3,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "row",
-                    gap: "5px",
-                  }}
-                >
-                  <UINewTypography color="text.secondary">
-                    © 2024 Mahek Creation
-                  </UINewTypography>
-                  |<UINewTypography>Mehndi Designer</UINewTypography>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "row",
-                    gap: "5px",
-                  }}
-                >
-                  <Link href="/" target="_blank" style={{ display: "flex" }}>
-                    <CallIcon />
-                  </Link>
-                  <Link
-                    href="https://www.instagram.com/the_dilu_mehndi_artist?igsh=MXhxZDlkbmo2b3du"
-                    target="_blank"
-                    style={{ display: "flex" }}
-                  >
-                    <InstagramIcon />
-                  </Link>
-                </Box>
               </Box>
             </Box>
           </ContainerV2>
