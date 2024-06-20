@@ -1,5 +1,6 @@
 import { comparePassword, hashPassword } from "../helpers/authHelper.js";
 import userModel from "../modules/userModel.js";
+import DetailsUser from "../modules/userReview.js";
 import JWT from "jsonwebtoken";
 
 //get instead post register
@@ -92,6 +93,66 @@ export const loginController = async (req, res) => {
       message: "Error in login",
       error,
     });
+  }
+};
+
+export const submitReview = async (req, res) => {
+  try {
+    const { email, fname, rating, review, country } = req.body;
+    if (!email) {
+      return res.send({ error: "Email is required" });
+    }
+    if (!fname) {
+      return res.send({ error: "First name is required" });
+    }
+    if (!rating) {
+      return res.send({ error: "Rating is required" });
+    }
+    if (!review) {
+      return res.send({ error: "Review is required" });
+    }
+    if (!country) {
+      return res.send({ error: "Country is required" });
+    }
+
+    //check user
+    const existingUser = await DetailsUser.findOne({ email });
+
+    // existingUser check
+    if (existingUser) {
+      return res.status(400).send({
+        success: false,
+        message: "Email already exists",
+      });
+    }
+
+    const newUser = new DetailsUser({
+      email,
+      fname,
+      rating,
+      review,
+      country,
+    });
+
+    await newUser.save();
+
+    res.status(201).json({ message: "Review submitted successfully", newUser });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to submit review", error: error.message });
+  }
+};
+
+// Controller function to fetch all reviews
+export const getReviews = async (req, res) => {
+  try {
+    const reviews = await DetailsUser.find({});
+    res.status(200).json(reviews);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch reviews", error: error.message });
   }
 };
 
