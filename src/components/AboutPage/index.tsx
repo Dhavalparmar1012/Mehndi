@@ -16,22 +16,36 @@ const ArtPage = () => {
       <MainLayout>
         <InformationLayoutContainer
           sx={{
-            height: { md: 197, xs: 197 },
-            backgroundImage: "url(/images/about-background.png)",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            position: "relative",
+            height: { lg: 190, md: 140, sm: 105, xs: 95 },
+            "&::before": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundImage: "url(/images/wallpaper.jpg)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              opacity: 0.6,
+              zIndex: 0,
+            },
           }}
         >
-          <Box>
-            <UINewTypography
-              variant="h1"
-              color="text.secondary"
-              sx={{ textAlign: "center" }}
-            >
-              About
-            </UINewTypography>
-          </Box>
+          <UINewTypography
+            variant="h1"
+            color="text.secondary"
+            sx={{
+              textAlign: "center",
+              fontSize: { xs: "16px", sm: "32px", md: "48px" },
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            Art Of Mehndi
+          </UINewTypography>
         </InformationLayoutContainer>
         <ContainerV2>
           <ArtMainContainer>

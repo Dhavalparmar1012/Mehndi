@@ -1,4 +1,5 @@
 import { comparePassword, hashPassword } from "../helpers/authHelper.js";
+import ImageStorage from "../modules/ImageStorage.js";
 import userModel from "../modules/userModel.js";
 import DetailsUser from "../modules/userReview.js";
 import JWT from "jsonwebtoken";
@@ -7,14 +8,17 @@ import JWT from "jsonwebtoken";
 export const registerController = async (req, res) => {
   try {
     const { email, password } = req.body;
+
     if (!email) {
       return res.send({ error: "Email is required" });
     }
     if (!password) {
       return res.send({ error: "Password is required" });
     }
+
     // check user
     const existingUser = await userModel.findOne({ email });
+
     // existingUser user
     if (existingUser) {
       return res.status(200).send({
@@ -96,7 +100,7 @@ export const loginController = async (req, res) => {
   }
 };
 
-export const submitReview = async (req, res) => {
+export const submitReviewController = async (req, res) => {
   try {
     const { email, fname, rating, review, country } = req.body;
     if (!email) {
@@ -115,10 +119,10 @@ export const submitReview = async (req, res) => {
       return res.send({ error: "Country is required" });
     }
 
-    //check user
+    // check user
     const existingUser = await DetailsUser.findOne({ email });
 
-    // existingUser check
+    // existingUser user
     if (existingUser) {
       return res.status(400).send({
         success: false,
@@ -126,33 +130,157 @@ export const submitReview = async (req, res) => {
       });
     }
 
-    const newUser = new DetailsUser({
+    const newUser = await new DetailsUser({
       email,
       fname,
       rating,
       review,
       country,
+    }).save();
+
+    res.status(201).send({
+      success: true,
+      message: "Review submitted successfully",
+      newUser,
     });
-
-    await newUser.save();
-
-    res.status(201).json({ message: "Review submitted successfully", newUser });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Failed to submit review", error: error.message });
+    res.status(500).send({
+      success: false,
+      message: "Failed to submit review",
+      error,
+    });
   }
 };
 
 // Controller function to fetch all reviews
-export const getReviews = async (req, res) => {
+export const getReviewController = async (req, res) => {
   try {
-    const reviews = await DetailsUser.find({});
-    res.status(200).json(reviews);
+    const reviewsList = await DetailsUser.find(req.query);
+    res.status(200).json({ reviewsList, nbHits: reviewsList.length });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Failed to fetch reviews", error: error.message });
+    res.status(500).send({
+      success: false,
+      message: "Failed to fetch reviews",
+      error: error.message,
+    });
+  }
+};
+
+export const deleteReviewController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await DetailsUser.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "Review not found",
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: "Review Deleted Successfully",
+      user,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "error while deleting Review",
+      error,
+    });
+  }
+};
+
+export const submitUploadController = async (req, res) => {
+  try {
+    const { category } = req.body;
+
+    // Handle file upload if present
+    let photo;
+    if (req.file) {
+      photo = req.file.buffer;
+    }
+
+    const newUser = await new ImageStorage({
+      category,
+      photo,
+    }).save();
+
+    res.status(201).send({
+      success: true,
+      message: "Mehndi list submitted successfully",
+      newUser,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Failed to submit Mehndi list",
+      error,
+    });
+  }
+};
+
+export const getUploadController = async (req, res) => {
+  try {
+    const customerList = await ImageStorage.find(req.query);
+    res.status(200).json({ customerList, nbHits: customerList.length });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Failed to fetch Mehndi details",
+      error: error.message,
+    });
+  }
+};
+
+export const getUploadPhotoController = async (req, res) => {
+  try {
+    const MehndiId = req.params.id;
+    const customer = await ImageStorage.findById(MehndiId);
+
+    if (!customer || !customer.photo) {
+      return res.status(404).send({
+        success: false,
+        message: "Customer not found or photo missing",
+      });
+    }
+
+    // Set the appropriate Content-Type header for the image
+    res.set("Content-Type", "image/*");
+    res.send(customer.photo);
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Failed to fetch customer photo",
+      error,
+    });
+  }
+};
+
+export const deleteUploadController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await ImageStorage.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "Mehndi list not found",
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: "Mehndi list Deleted Successfully",
+      user,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "error while deleting Mehndi list",
+      error,
+    });
   }
 };
 

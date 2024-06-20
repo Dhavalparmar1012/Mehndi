@@ -25,7 +25,7 @@ const Navbar = () => {
     setDrawerOpen(!drawerOpen);
   };
 
-  const isActive = (path: any) => router.pathname === path;
+  const isActive = (path: string) => router.pathname === path;
 
   return (
     <Box
@@ -34,8 +34,13 @@ const Navbar = () => {
         justifyContent: "center",
         alignItems: "center",
         gap: { xs: "20px", sm: "50px" },
-        margin: "0 auto",
         textAlign: "center",
+        position: "sticky",
+        top: -1,
+        backgroundColor: "background.paper",
+        zIndex: theme.zIndex.appBar,
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        width: "100%",
       }}
     >
       {isMobile && (
@@ -77,7 +82,7 @@ const Navbar = () => {
                     color: isActive(tab.path)
                       ? "primary.contrastText"
                       : "text.secondary",
-                      fontWeight: isActive(tab.path) ? 900 : 500,
+                    fontWeight: isActive(tab.path) ? 900 : 500,
                   }}
                 >
                   {tab.name}

@@ -21,7 +21,7 @@ export default function LoginLayout({ children }: { children: ReactNode }) {
           flex={1}
           sx={{
             backgroundImage:
-              "url(/images/NewThemeImages/home/sign_up_main.png)",
+              "url(/images/Mehndi_latest/Bridal_leg/Bridal_leg_1.jpg)",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",

@@ -1,98 +1,198 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import InputAdornment from "@mui/material/InputAdornment";
+import React, { useEffect, useRef } from "react";
+
+// MATERIAL - UI
 import * as Yup from "yup";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 import { useFormik } from "formik";
+import { IconButton } from "@mui/material";
+import axios from "axios";
+import Link from "next/link";
 import Button from "@mui/material/Button";
-import { useState } from "react";
-import UINewTypography from "../UIComponent/UINewTypography";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
+import ListIcon from "@mui/icons-material/List";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ReviewsIcon from "@mui/icons-material/Reviews";
+
+// PROJECT IMPORTS
 import InputText from "../UIComponent/InputText";
+import ContainerV2 from "../UIComponent/ContainerV2";
+import { HeadlinePink } from "../ReviewPage/Common.styled";
+import UINewTypography from "../UIComponent/UINewTypography";
+import { StyledSelect } from "../UIComponent/StyleSelect";
+import { ReviewFormButton, ReviewFormField } from "../ReviewPage/Review.styled";
+import { useAuth } from "@/components/AuthContext/authContext";
+import {
+  UploadMainContainer,
+  ViewPageMainContainer,
+  ViewPageContainer,
+  ViewPageIcon,
+} from "../ViewPage/ViewPage.styled";
+
+// TYPES
+import { CategoryType } from "@/constants/category.constants";
 
 const UploadFileContainer = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-  const [checked, setChecked] = useState(true);
+  const { push } = useRouter();
 
-  const handleCheckboxChange = () => {
-    setChecked(!checked);
-  };
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { isAuthenticated, logout } = useAuth();
 
-  const validationSchema = Yup.object({
-    srno: Yup.string().required("SeriesNo is required"),
+  const validationSchema = Yup.object().shape({
+    category: Yup.number().required("Category is required"),
+    photo: Yup.mixed().required("File upload is required"),
   });
 
-  const handleFormSubmit = (values: any) => {
-    console.log(values);
+  const initialValues = {
+    category: "",
+    photo: null,
   };
 
-  const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
-    useFormik({
-      initialValues: {
-        srno: "",
-      },
-      validationSchema: validationSchema,
-      onSubmit: handleFormSubmit,
-    });
+  const {
+    errors,
+    values,
+    touched,
+    handleBlur,
+    handleSubmit,
+    setFieldValue,
+    isSubmitting,
+    setSubmitting,
+    handleReset,
+  } = useFormik({
+    initialValues,
+    enableReinitialize: true,
+    validationSchema,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const formData = new FormData();
+        formData.append("category", values.category);
+        if (values.photo) {
+          formData.append("photo", values.photo);
+        }
 
-  const handleCloseAlert = () => {
-    setShowAlert(false);
+        const res = await axios.post(
+          "http://localhost:8080/api/v1/auth/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        toast.success(res.data.message);
+        setSubmitting(false);
+        resetForm();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+
+  const handleFileChange = (e: any) => {
+    setFieldValue("photo", e.target.files[0]);
   };
+
+  const handleChangeCategoryOpen = async (event: any) => {
+    const category = event.target.value;
+    setFieldValue("category", category);
+  };
+
+  const handleResetClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    handleReset(e);
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+  };
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      push("/login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
+
   return (
-    <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-          gap: 5,
-          p: 5,
-          width: "100%",
-        }}
-      >
-        <UINewTypography variant="h2" sx={{ color: "text.secondary" }}>
-          Upload Image
-        </UINewTypography>
+    isAuthenticated && (
+      <ContainerV2>
+        <UploadMainContainer>
+          <form onSubmit={handleSubmit}>
+            <ViewPageMainContainer>
+              <ViewPageContainer>
+                <UINewTypography
+                  variant="h2"
+                  sx={{ textAlign: "center", color: "text.secondary" }}
+                >
+                  Upload Image
+                </UINewTypography>
+                <HeadlinePink />
+                <ViewPageIcon>
+                  <Link href="/view-review">
+                    <IconButton>
+                      <ReviewsIcon sx={{ color: "white.main" }} />
+                    </IconButton>
+                  </Link>
+                  <Link href="/view">
+                    <IconButton>
+                      <ListIcon sx={{ color: "white.main" }} />
+                    </IconButton>
+                  </Link>
 
-        <Box component="form" onSubmit={handleSubmit}>
-          <Box
-            sx={{
-              gap: 0.5,
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-            }}
-          >
-            <UINewTypography variant="bodySemiBold">Series No:</UINewTypography>
-            <InputText
-              id="srno"
-              name="srno"
-              fullWidth
-              placeholder="Enter your Series number"
-              value={values.srno}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.srno && Boolean(errors.srno)}
-              helperText={touched.srno && errors.srno}
-              sx={{
-                border: "2px solid",
-                borderColor: "secondary.light",
-              }}
-            />
-          </Box>
+                  <IconButton onClick={logout}>
+                    <LogoutIcon sx={{ color: "white.main" }} />
+                  </IconButton>
+                </ViewPageIcon>
+              </ViewPageContainer>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Submit
-          </Button>
-        </Box>
-      </Box>
-    </>
+              <ReviewFormField>
+                <FormControl>
+                  <StyledSelect
+                    value={values.category}
+                    onChange={handleChangeCategoryOpen}
+                    displayEmpty
+                    inputProps={{ "aria-label": "Without label" }}
+                    error={touched.category && Boolean(errors.category)}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {CategoryType.map((type) => (
+                      <MenuItem key={type.id} value={type.id}>
+                        {type.name}
+                      </MenuItem>
+                    ))}
+                  </StyledSelect>
+                </FormControl>
+
+                <InputText
+                  type="file"
+                  id="photo"
+                  ref={inputRef}
+                  onChange={handleFileChange}
+                  onBlur={handleBlur}
+                  error={touched.photo && Boolean(errors.photo)}
+                  helperText={touched.photo && errors.photo}
+                />
+              </ReviewFormField>
+              <ReviewFormButton>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={isSubmitting}
+                >
+                  Submit
+                </Button>
+
+                <Button variant="outlined" onClick={handleResetClick}>
+                  Reset
+                </Button>
+              </ReviewFormButton>
+            </ViewPageMainContainer>
+          </form>
+        </UploadMainContainer>
+      </ContainerV2>
+    )
   );
 };
 

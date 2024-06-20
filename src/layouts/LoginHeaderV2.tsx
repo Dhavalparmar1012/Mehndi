@@ -20,12 +20,7 @@ const LoginHeaderV2 = () => (
           pt: 3,
         }}
       >
-        <Box
-          component="img"
-          src="/images/NewThemeImages/home/sign_up_logo.png"
-          width={154}
-          height="100%"
-        />
+        <Box component="img" src="/images/logo.jpg" width={154} height="100%" />
       </Box>
     </Box>
   </>

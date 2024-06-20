@@ -3,7 +3,6 @@ import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import MainLayout from "@/layouts/MainLayout/MainDashboardLayout";
 import Scrollbars from "react-custom-scrollbars-2";
@@ -34,7 +33,8 @@ import {
 } from "./Review.styled";
 import { format } from "path";
 
-interface Review {
+export interface Review {
+  _id: string;
   fname: string;
   email: string;
   rating: number;
@@ -44,7 +44,6 @@ interface Review {
 }
 
 const ReviewPage = () => {
-  const { push } = useRouter();
   const [reviews, setReviews] = useState<Review[]>([]);
 
   const validationSchema = Yup.object({
@@ -75,63 +74,83 @@ const ReviewPage = () => {
     setFieldValue,
     handleReset,
     isSubmitting,
+    setSubmitting,
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
-      handleSubmitForm(values);
+    onSubmit: (values, { resetForm }) => {
+      handleSubmitForm(values, resetForm);
     },
   });
 
-  const handleSubmitForm = async (values: any) => {
+  const handleSubmitForm = async (values: any, resetForm: () => void) => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/review",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/review`,
         values
       );
       if (res && res.data.success) {
         toast.success(res.data.message);
-        push("/review");
+        fetchReviews();
+        resetForm();
       } else {
-        toast.error(res.data.message || "Login failed");
+        toast.error(res.data.message || "Submission failed");
       }
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong");
     }
+    setSubmitting(false);
+  };
+
+  const fetchReviews = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews`
+      );
+      setReviews(res.data.reviewsList);
+    } catch (error) {
+      console.error("Failed to fetch reviews", error);
+    }
   };
 
   useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const res = await axios.get(
-          "http://localhost:8080/api/v1/auth/reviews"
-        );
-        setReviews(res.data);
-      } catch (error) {
-        console.error("Failed to fetch reviews", error);
-      }
-    };
-
     fetchReviews();
   }, []);
+
   return (
     <>
       <Scrollbars autoHide autoHeight autoHeightMax={"100vh"}>
         <MainLayout>
           <InformationLayoutContainer
             sx={{
-              height: 197,
-              backgroundImage: "url(/images/about-background.png)",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              position: "relative",
+              height: { lg: 190, md: 140, sm: 105, xs: 95 },
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                backgroundImage: "url(/images/wallpaper.jpg)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                opacity: 0.6,
+                zIndex: 0,
+              },
             }}
           >
             <UINewTypography
               variant="h1"
               color="text.secondary"
-              sx={{ textAlign: "center" }}
+              sx={{
+                textAlign: "center",
+                fontSize: { xs: "16px", sm: "32px", md: "48px" },
+                position: "relative",
+                zIndex: 1,
+              }}
             >
               Review
             </UINewTypography>

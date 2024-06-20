@@ -25,3 +25,13 @@ export const FooterPageAddress = styled(Box)(() => ({
     alignItems: "center",
   },
 }));
+
+export const TelephoneContainer = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+}));
+
+export const TelephoneIP = styled(Box)(() => ({
+  display: "flex",
+}));

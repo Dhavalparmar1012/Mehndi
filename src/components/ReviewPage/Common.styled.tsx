@@ -7,7 +7,7 @@ export const MainContainerSpace = styled(Box)(() => ({
   justifyContent: "center",
   flexDirection: "column",
   alignItems: "center",
-  marginTop: theme.spacing(13),
+  marginTop: theme.spacing(8),
   marginBottom: theme.spacing(2),
   [theme.breakpoints.up("md")]: {
     gap: theme.spacing(13),

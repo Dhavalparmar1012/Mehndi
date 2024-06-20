@@ -7,7 +7,12 @@ import UINewTypography from "@/components/UIComponent/UINewTypography";
 
 //PROJECT IMPORT
 import { HeadlinePink } from "@/components/ReviewPage/Common.styled";
-import { FooterPageAddress, FooterPageLink } from "./Footer.styled";
+import {
+  FooterPageAddress,
+  FooterPageLink,
+  TelephoneContainer,
+  TelephoneIP,
+} from "./Footer.styled";
 
 const Footer = () => {
   return (
@@ -65,14 +70,14 @@ const Footer = () => {
                   About
                 </Link>
               </Typography>
-              {/* <Typography variant="body2">
+              <Typography variant="body2">
                 <Link
                   href="/review"
                   sx={{ color: "#B7B5B9", textDecoration: "none" }}
                 >
                   Review
                 </Link>
-              </Typography> */}
+              </Typography>
             </FooterPageLink>
           </Grid>
           <Grid item xs={12} md={3}>
@@ -106,9 +111,9 @@ const Footer = () => {
             </Typography>
             <HeadlinePink />
             <FooterPageLink>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Phone sx={{ mr: 1 }} />
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <TelephoneContainer>
+                <TelephoneIP>
+                  <Phone sx={{ mr: 1 }} />
                   <Link
                     href="tel:+918758056799"
                     style={{
@@ -122,6 +127,9 @@ const Footer = () => {
                       +91 8758056799
                     </UINewTypography>
                   </Link>
+                </TelephoneIP>
+                <TelephoneIP>
+                  <Phone sx={{ mr: 1 }} />
                   <Link
                     href="tel:+918200320864"
                     style={{
@@ -135,8 +143,8 @@ const Footer = () => {
                       +91 8200320864
                     </UINewTypography>
                   </Link>
-                </Box>
-              </Box>
+                </TelephoneIP>
+              </TelephoneContainer>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <InstagramIcon sx={{ mr: 1 }} />
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
