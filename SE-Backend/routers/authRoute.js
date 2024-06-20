@@ -2,6 +2,8 @@ import express from "express";
 import {
   registerController,
   loginController,
+  submitReview,
+  getReviews,
   testController,
 } from "../controllers/authController.js";
 import { requireSignIn, isAdmin } from "../middlewares/authMiddleware.js";
@@ -13,7 +15,9 @@ const router = express.Router();
 // LOGIN || METHOD GET
 router.post("/register", registerController);
 router.post("/login", loginController);
+router.post("/review", submitReview);
 
-router.get("/test", requireSignIn, isAdmin, testController);
+// GET route to fetch all reviews
+router.get("/reviews", getReviews);
 
 export default router;

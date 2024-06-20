@@ -11,4 +11,8 @@ export const MainDashboardTab = [
     name: "ART OF MEHNDI",
     path: "/art-of-mehndi",
   },
+  // {
+  //   name: "REVIEW",
+  //   path: "/review",
+  // },
 ];

@@ -1,13 +1,24 @@
+//MUI IMPORT
 import Grid from "@mui/material/Grid";
 import React, { useState } from "react";
-import UINewTypography from "../UIComponent/UINewTypography";
-import { InformationLayoutContainer } from "../HomePage/HomePage.styled";
-import MainLayout from "@/layouts/MainLayout/MainDashboardLayout";
 import Scrollbars from "react-custom-scrollbars-2";
 import Box from "@mui/material/Box";
-import ContainerV2 from "../UIComponent/ContainerV2";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+
+//PROJECT IMPORT
+import { InformationLayoutContainer } from "../HomePage/HomePage.styled";
+import MainLayout from "@/layouts/MainLayout/MainDashboardLayout";
+import ContainerV2 from "../UIComponent/ContainerV2";
+import UINewTypography from "../UIComponent/UINewTypography";
+import Arbic from "./Arbic";
+import Modern from "./Modern";
+import Marwari from "./Marwari";
+import Bridal_leg from "./Bridal_leg";
+import MehndiTatto from "./MehndiTatto";
+import Bridal_hand from "./Bridal_hand";
+
+//TYPES
 import {
   Arbic_Const,
   BridalHand,
@@ -16,12 +27,6 @@ import {
   MehndiTattoo_Const,
   Modern_Const,
 } from "@/constants/bridalLeg.constants";
-import Bridal_leg from "./Bridal_leg";
-import Marwari from "./Marwari";
-import Arbic from "./Arbic";
-import MehndiTatto from "./MehndiTatto";
-import Bridal_hand from "./Bridal_hand";
-import Modern from "./Modern";
 
 const MahendiType = [
   "All Design",
@@ -38,10 +43,8 @@ const GalleryPage = () => {
 
   const handleClick = (type: string) => {
     setActiveType(type);
-    // Add logic to handle the click event
   };
 
-  // Filter images based on the active type
   let filteredImages = [];
   if (activeType === "Bridal hand") {
     filteredImages = BridalHand;
@@ -74,7 +77,7 @@ const GalleryPage = () => {
         <MainLayout>
           <InformationLayoutContainer
             sx={{
-              height: 197,
+              height: { md: 197, xs: 197 },
               backgroundImage: "url(/images/about-background.png)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",

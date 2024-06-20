@@ -10,15 +10,22 @@ import {
   ListItem,
   IconButton,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useRouter } from "next/router";
+
 const Navbar = () => {
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const router = useRouter();
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  const isActive = (path: any) => router.pathname === path;
 
   return (
     <Box
@@ -26,9 +33,8 @@ const Navbar = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        gap: "50px",
+        gap: { xs: "20px", sm: "50px" },
         margin: "0 auto",
-        padding: "10px",
         textAlign: "center",
       }}
     >
@@ -44,7 +50,7 @@ const Navbar = () => {
       )}
 
       <Drawer
-        anchor="left"
+        anchor="top"
         open={drawerOpen}
         onClose={toggleDrawer}
         sx={{ display: { xs: "block", md: "none" } }}
@@ -57,8 +63,23 @@ const Navbar = () => {
               passHref
               style={{ textDecoration: "none" }}
             >
-              <ListItem component="a">
-                <UINewTypography sx={{ color: "text.secondary" }}>
+              <ListItem
+                component="a"
+                onClick={toggleDrawer}
+                sx={{
+                  backgroundColor: isActive(tab.path)
+                    ? "primary.main"
+                    : "inherit",
+                }}
+              >
+                <UINewTypography
+                  sx={{
+                    color: isActive(tab.path)
+                      ? "primary.contrastText"
+                      : "text.secondary",
+                      fontWeight: isActive(tab.path) ? 900 : 500,
+                  }}
+                >
                   {tab.name}
                 </UINewTypography>
               </ListItem>
@@ -86,8 +107,22 @@ const Navbar = () => {
               passHref
               style={{ textDecoration: "none" }}
             >
-              <CommonMenuBox sx={{ color: "text.primary" }}>
-                <UINewTypography sx={{ color: "text.secondary" }}>
+              <CommonMenuBox
+                sx={{
+                  color: isActive(tab.path) ? "primary.main" : "text.primary",
+                  borderBottom: isActive(tab.path)
+                    ? "2px solid primary.main"
+                    : "none",
+                }}
+              >
+                <UINewTypography
+                  sx={{
+                    color: isActive(tab.path)
+                      ? "primary.main"
+                      : "text.secondary",
+                    fontWeight: isActive(tab.path) ? 900 : 500,
+                  }}
+                >
                   {tab.name}
                 </UINewTypography>
               </CommonMenuBox>

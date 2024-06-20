@@ -1,10 +1,13 @@
-import MainLayout from "@/layouts/MainLayout/MainDashboardLayout";
+//MUI IMPORT
 import React from "react";
-import Scrollbars from "react-custom-scrollbars-2";
-import { InformationLayoutContainer } from "../HomePage/HomePage.styled";
 import Box from "@mui/material/Box";
-import UINewTypography from "../UIComponent/UINewTypography";
+import Scrollbars from "react-custom-scrollbars-2";
+
+//PROJECT IMPORT
 import ContainerV2 from "../UIComponent/ContainerV2";
+import MainLayout from "@/layouts/MainLayout/MainDashboardLayout";
+import UINewTypography from "../UIComponent/UINewTypography";
+import { InformationLayoutContainer } from "../HomePage/HomePage.styled";
 import { ArtContainer, ArtImageBox, ArtMainContainer } from "./ArtPage.styled";
 
 const ArtPage = () => {
@@ -13,20 +16,22 @@ const ArtPage = () => {
       <MainLayout>
         <InformationLayoutContainer
           sx={{
-            height: 197,
+            height: { md: 197, xs: 197 },
             backgroundImage: "url(/images/about-background.png)",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <UINewTypography
-            variant="h1"
-            color="text.secondary"
-            sx={{ textAlign: "center" }}
-          >
-            Art of Mehndi
-          </UINewTypography>
+          <Box>
+            <UINewTypography
+              variant="h1"
+              color="text.secondary"
+              sx={{ textAlign: "center" }}
+            >
+              About
+            </UINewTypography>
+          </Box>
         </InformationLayoutContainer>
         <ContainerV2>
           <ArtMainContainer>
