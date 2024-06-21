@@ -21,6 +21,7 @@ import {
 } from "./HomePage.styled";
 import { HeadlinePink, MainContainerSpace } from "../ReviewPage/Common.styled";
 import { ReviewTitleMainContainer } from "../ReviewPage/Review.styled";
+import ReviewStatus from "./ReviewStatus";
 
 const HomePage = () => {
   const images = [
@@ -95,7 +96,7 @@ const HomePage = () => {
                     <UINewTypography
                       variant="h3"
                       sx={{
-                        color: "text.secondary",
+                        color: "#6488ea",
                         textAlign: "center",
                       }}
                     >
@@ -113,7 +114,7 @@ const HomePage = () => {
                     <UINewTypography
                       variant="h3"
                       textAlign="center"
-                      color="text.secondary"
+                      color="#6488ea"
                     >
                       Female Staff
                     </UINewTypography>
@@ -129,7 +130,7 @@ const HomePage = () => {
                     <UINewTypography
                       variant="h3"
                       textAlign="center"
-                      color="text.secondary"
+                      color="#6488ea"
                     >
                       Great Designs
                     </UINewTypography>
@@ -210,11 +211,13 @@ const HomePage = () => {
                 </Swiper>
               </Box>
 
+              <ReviewStatus />
+
               <ReviewTitleMainContainer>
                 <UINewTypography
                   variant="h2"
                   textAlign="center"
-                  color="text.secondary"
+                  color="#6488ea"
                 >
                   Services
                 </UINewTypography>

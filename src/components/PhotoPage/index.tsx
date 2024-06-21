@@ -7,12 +7,12 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  SelectChangeEvent, // Import SelectChangeEvent from @mui/material
+  SelectChangeEvent,
 } from "@mui/material";
 
 interface CategoryData {
   _id: string;
-  category: number; // Assuming the category is a number
+  category: number;
   photo?: string;
 }
 
@@ -38,7 +38,9 @@ const CategoryPhotos = () => {
 
   const fetchCategoryData = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/v1/auth/uploads");
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads`
+      );
       setCategoryData(res.data.customerList);
     } catch (error) {
       console.error("Failed to fetch categories", error);
@@ -70,7 +72,7 @@ const CategoryPhotos = () => {
               <Typography variant="body2">ID: {data._id}</Typography>
               <Box
                 component="img"
-                src={`http://localhost:8080/api/v1/auth/upload/photo/${data._id}`}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/upload/photo/${data._id}`}
                 style={{ maxWidth: "100px", maxHeight: "100px" }}
                 alt={`${categoryName}`}
               />

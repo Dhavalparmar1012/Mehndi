@@ -69,7 +69,7 @@ const ViewReviewPage = () => {
   const handleDelete = async (id: string) => {
     try {
       const res = await axios.delete(
-        `http://localhost:8080/api/v1/auth/delete-review/${id}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/delete-review/${id}`
       );
       toast.success(res.data.message);
       fetchCustomers();

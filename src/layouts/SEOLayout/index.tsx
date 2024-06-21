@@ -27,6 +27,8 @@ const SEOLayout = ({ children }: { children: ReactNode }) => {
           name="title"
           content={`${pageTitle?.metaTitle ?? ""}${APP_TITLE}`}
         />
+
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       {children}
     </>

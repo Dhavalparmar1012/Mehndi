@@ -55,7 +55,11 @@ const ArtPage = () => {
             sx={{ gap: 4, alignItems: "start", maxWidth: 614, mx: "auto" }}
           >
             <ArtContainer>
-              <UINewTypography variant="SubtitleLargeBold" align="left">
+              <UINewTypography
+                variant="SubtitleLargeBold"
+                align="left"
+                color="#6488ea"
+              >
                 What is Mehndi?
               </UINewTypography>
               <Box component="ul" pl={3}>
@@ -89,7 +93,11 @@ const ArtPage = () => {
             />
 
             <ArtContainer>
-              <UINewTypography variant="SubtitleLargeBold" align="left">
+              <UINewTypography
+                variant="SubtitleLargeBold"
+                align="left"
+                color="#6488ea"
+              >
                 Uses of Mehndi
               </UINewTypography>
               <Box component="ul" pl={3}>

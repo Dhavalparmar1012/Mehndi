@@ -56,6 +56,17 @@ export const getHeaderData = (
       },
     },
     {
+      url: "/review",
+      data: {
+        en: {
+          title: "review",
+          metaTitle: "review",
+          metaKeywords: "review",
+          metaDescription: "reviews",
+        },
+      },
+    },
+    {
       url: "/uploadfile",
       data: {
         en: {
@@ -96,6 +107,39 @@ export const getHeaderData = (
           metaTitle: "Contact us",
           metaKeywords: "Contact us",
           metaDescription: "Contact us",
+        },
+      },
+    },
+    {
+      url: "/photo",
+      data: {
+        en: {
+          title: "Photo",
+          metaTitle: "Photo",
+          metaKeywords: "Photo",
+          metaDescription: "Photo",
+        },
+      },
+    },
+    {
+      url: "/view-review",
+      data: {
+        en: {
+          title: "View Review",
+          metaTitle: "View Review",
+          metaKeywords: "View Review",
+          metaDescription: "View Review",
+        },
+      },
+    },
+    {
+      url: "/view",
+      data: {
+        en: {
+          title: "View",
+          metaTitle: "View",
+          metaKeywords: "View",
+          metaDescription: "View",
         },
       },
     },

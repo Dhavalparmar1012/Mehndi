@@ -87,7 +87,7 @@ const Item = ({ item }: { item: any }) => {
         src={item.imgPath}
         alt={item.name}
       />
-      <Box sx={{ padding: 2, textAlign: "center" }}>
+      <Box sx={{ padding: 2, textAlign: "center", color: "#6488ea" }}>
         <h2>{item.name}</h2>
       </Box>
     </Paper>

@@ -7,7 +7,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import InputAdornment from "@mui/material/InputAdornment";
-import Button from "@mui/material/Button";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -22,6 +21,7 @@ import {
   LoginContainer,
   LoginFieldContainer,
 } from "./Login.styled";
+import StyleButton from "../UIComponent/StyleButton";
 
 const LoginPage = () => {
   const { push } = useRouter();
@@ -61,7 +61,7 @@ const LoginPage = () => {
   const handleSubmitForm = async (values: any) => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/login",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/login`,
         values
       );
       if (res && res.data.success) {
@@ -94,6 +94,7 @@ const LoginPage = () => {
                 name="email"
                 id="email"
                 type="email"
+                placeholder="Email"
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -141,14 +142,14 @@ const LoginPage = () => {
                 }}
               />
             </LoginFieldContainer>
-            <Button
+            <StyleButton
               type="submit"
               fullWidth
               variant="contained"
               disabled={isSubmitting}
             >
               Sign In
-            </Button>
+            </StyleButton>
           </LoginContainer>
         </form>
       </LoginPageMainContainer>

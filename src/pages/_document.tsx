@@ -20,7 +20,7 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
     <Html lang="en">
       <Head>
         {/* PWA primary color */}
-        <meta name="theme-color" content={theme.palette.primary.main} />
+        <meta name="theme-color" content={theme.palette.success.main} />
         <link rel="shortcut icon" href="/favicon32.svg" />
         <link rel="icon" type="image/png" href="/favicon.svg" sizes="16x16" />
         <link rel="icon" type="image/png" href="/favicon.svg" sizes="32x32" />

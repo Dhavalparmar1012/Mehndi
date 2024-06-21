@@ -63,7 +63,9 @@ const ViewPage = () => {
 
   const fetchCustomers = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/v1/auth/uploads");
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads`
+      );
       setCategoryData(res.data.customerList);
     } catch (error) {
       console.error("Failed to fetch customers", error);
@@ -73,7 +75,7 @@ const ViewPage = () => {
   const handleDelete = async (id: string) => {
     try {
       const res = await axios.delete(
-        `http://localhost:8080/api/v1/auth/delete-customer/${id}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/delete-customer/${id}`
       );
       toast.success(res.data.message);
       fetchCustomers();

@@ -32,6 +32,7 @@ import {
   ReviewViewMainContainer,
 } from "./Review.styled";
 import { format } from "path";
+import StyleButton from "../UIComponent/StyleButton";
 
 export interface Review {
   _id: string;
@@ -160,7 +161,7 @@ const ReviewPage = () => {
               <ReviewTitleMainContainer>
                 <UINewTypography
                   variant="h2"
-                  sx={{ textAlign: "center", color: "text.secondary" }}
+                  sx={{ textAlign: "center", color: "#6488ea" }}
                 >
                   Thank you for visiting our mehndi
                 </UINewTypography>
@@ -177,7 +178,7 @@ const ReviewPage = () => {
                 <ReviewTitleMainContainer>
                   <UINewTypography
                     variant="h2"
-                    sx={{ textAlign: "center", color: "text.secondary" }}
+                    sx={{ textAlign: "center", color: "#6488ea" }}
                   >
                     Submit your review
                   </UINewTypography>
@@ -287,14 +288,18 @@ const ReviewPage = () => {
                       </Box>
                     </ReviewFormField>
                     <ReviewFormButton>
-                      <Button
+                      <StyleButton
                         type="submit"
                         variant="contained"
                         disabled={isSubmitting}
                       >
                         Submit
-                      </Button>
-                      <Button variant="outlined" onClick={handleReset}>
+                      </StyleButton>
+                      <Button
+                        variant="outlined"
+                        onClick={handleReset}
+                        sx={{ color: "error.300" }}
+                      >
                         Reset
                       </Button>
                     </ReviewFormButton>
