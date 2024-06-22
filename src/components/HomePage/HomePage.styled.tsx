@@ -25,3 +25,13 @@ export const MehndiServiceTitle = styled(UINewTypography)(() => ({
     textAlign: "center",
   },
 }));
+
+export const ScrollToTopIconsContainer = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  zIndex: 1000,
+  position: "fixed",
+  bottom: theme.spacing(2),
+  right: theme.spacing(2),
+  gap: theme.spacing(1),
+}));

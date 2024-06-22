@@ -1,5 +1,5 @@
 //IMPORT MUI
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Scrollbars from "react-custom-scrollbars-2";
@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/bundle";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import axios from "axios";
+
 //PROJECT IMPORT
 import MainLayout from "@/layouts/MainLayout/MainDashboardLayout";
 import MyCarousel from "./MyCarousel";
@@ -22,6 +22,7 @@ import {
 import { HeadlinePink, MainContainerSpace } from "../ReviewPage/Common.styled";
 import { ReviewTitleMainContainer } from "../ReviewPage/Review.styled";
 import ReviewStatus from "./ReviewStatus";
+import ScrollToTopIcons from "./ScrollToTopIcons";
 
 const HomePage = () => {
   const images = [
@@ -231,6 +232,8 @@ const HomePage = () => {
                   and candles.
                 </UINewTypography>
               </ReviewTitleMainContainer>
+
+              <ScrollToTopIcons />
             </MainContainerSpace>
           </ContainerV2>
         </MainLayout>
