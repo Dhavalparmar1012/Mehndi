@@ -21,6 +21,7 @@ import {
 } from "./HomePage.styled";
 import { HeadlinePink, MainContainerSpace } from "../ReviewPage/Common.styled";
 import { ReviewTitleMainContainer } from "../ReviewPage/Review.styled";
+import ContactForm from "../ContactPage/ContactForm";
 import ReviewStatus from "./ReviewStatus";
 import ScrollToTopIcons from "./ScrollToTopIcons";
 
@@ -76,11 +77,11 @@ const HomePage = () => {
             }}
           >
             <UINewTypography
-              variant="h1"
               color="text.secondary"
               sx={{
                 textAlign: "center",
                 fontSize: { xs: "16px", sm: "32px", md: "48px" },
+                fontWeight: 700,
                 position: "relative",
                 zIndex: 1,
               }}
@@ -232,6 +233,8 @@ const HomePage = () => {
                   and candles.
                 </UINewTypography>
               </ReviewTitleMainContainer>
+
+              <ContactForm />
 
               <ScrollToTopIcons />
             </MainContainerSpace>

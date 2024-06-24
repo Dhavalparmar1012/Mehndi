@@ -21,7 +21,7 @@ import { Rating, TablePagination } from "@mui/material";
 
 // PROJECT IMPORTS
 import ContainerV2 from "../UIComponent/ContainerV2";
-import { useAuth } from "@/components/AuthContext/authContext";
+import { useAuth } from "@/context/AuthContext/authContext";
 import { HeadlinePink } from "../ReviewPage/Common.styled";
 import UINewTypography from "../UIComponent/UINewTypography";
 import {

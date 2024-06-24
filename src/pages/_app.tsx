@@ -8,7 +8,7 @@ import createEmotionCache from "@/createEmotionCache";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import dynamic from "next/dynamic";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthProvider } from "@/components/AuthContext/authContext";
+import { AuthProvider } from "@/context/AuthContext/authContext";
 
 const clientSideEmotionCache = createEmotionCache();
 

@@ -15,6 +15,13 @@ export const MehndiServiceMainContainer = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1),
+  padding: 2,
+  cursor: "pointer",
+  transition: "transform 0.3s, box-shadow 0.3s",
+  "&:hover": {
+    transform: "scale(1.05)",
+    boxShadow: "0 8px 16px rgba(0,0,0,0.3)",
+  },
 }));
 
 export const MehndiServiceTitle = styled(UINewTypography)(() => ({
@@ -34,4 +41,11 @@ export const ScrollToTopIconsContainer = styled(Box)(() => ({
   bottom: theme.spacing(2),
   right: theme.spacing(2),
   gap: theme.spacing(1),
+}));
+
+export const ContactContainer = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(0.5),
+  width: "100%",
 }));

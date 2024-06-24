@@ -12,7 +12,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 // PROJECT IMPORTS
-import { useAuth } from "@/components/AuthContext/authContext";
+import { useAuth } from "@/context/AuthContext/authContext";
 import UINewTypography from "../UIComponent/UINewTypography";
 import InputText from "../UIComponent/InputText";
 import LoginLayout from "@/layouts/LoginLayout";

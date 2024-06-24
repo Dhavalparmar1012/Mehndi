@@ -22,13 +22,14 @@ import { HeadlinePink } from "../ReviewPage/Common.styled";
 import UINewTypography from "../UIComponent/UINewTypography";
 import { StyledSelect } from "../UIComponent/StyleSelect";
 import { ReviewFormButton, ReviewFormField } from "../ReviewPage/Review.styled";
-import { useAuth } from "@/components/AuthContext/authContext";
+import { useAuth } from "@/context/AuthContext/authContext";
 import {
   UploadMainContainer,
   ViewPageMainContainer,
   ViewPageContainer,
   ViewPageIcon,
 } from "../ViewPage/ViewPage.styled";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
 
 // TYPES
 import { CategoryType } from "@/constants/category.constants";
@@ -128,6 +129,11 @@ const UploadFileContainer = () => {
                 </UINewTypography>
                 <HeadlinePink />
                 <ViewPageIcon>
+                  <Link href="/view-contact">
+                    <IconButton>
+                      <ContactPageIcon sx={{ color: "white.main" }} />
+                    </IconButton>
+                  </Link>
                   <Link href="/view-review">
                     <IconButton>
                       <ReviewsIcon sx={{ color: "white.main" }} />

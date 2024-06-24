@@ -78,6 +78,14 @@ const Footer = () => {
                   Review
                 </Link>
               </Typography>
+              <Typography variant="body2">
+                <Link
+                  href="/contact"
+                  sx={{ color: "#B7B5B9", textDecoration: "none" }}
+                >
+                  Contact
+                </Link>
+              </Typography>
             </FooterPageLink>
           </Grid>
           <Grid item xs={12} md={3}>

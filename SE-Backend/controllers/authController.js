@@ -2,9 +2,10 @@ import { comparePassword, hashPassword } from "../helpers/authHelper.js";
 import ImageStorage from "../modules/ImageStorage.js";
 import userModel from "../modules/userModel.js";
 import DetailsUser from "../modules/userReview.js";
+import UserContact from "../modules/userContact.js";
 import JWT from "jsonwebtoken";
 
-//get instead post register
+// Registration
 export const registerController = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -51,6 +52,7 @@ export const registerController = async (req, res) => {
   }
 };
 
+// Login
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -100,6 +102,7 @@ export const loginController = async (req, res) => {
   }
 };
 
+// Review
 export const submitReviewController = async (req, res) => {
   try {
     const { email, fname, rating, review, country } = req.body;
@@ -152,7 +155,6 @@ export const submitReviewController = async (req, res) => {
   }
 };
 
-// Controller function to fetch all reviews
 export const getReviewController = async (req, res) => {
   try {
     const reviewsList = await DetailsUser.find(req.query);
@@ -192,6 +194,7 @@ export const deleteReviewController = async (req, res) => {
   }
 };
 
+// Upload Image
 export const submitUploadController = async (req, res) => {
   try {
     const { category } = req.body;
@@ -279,6 +282,97 @@ export const deleteUploadController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "error while deleting Mehndi list",
+      error,
+    });
+  }
+};
+
+// Contact
+export const getContactController = async (req, res) => {
+  try {
+    const reviewsList = await UserContact.find(req.query);
+    res.status(200).json({ reviewsList, nbHits: reviewsList.length });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Failed to fetch contact",
+      error: error.message,
+    });
+  }
+};
+
+export const submitContactController = async (req, res) => {
+  try {
+    const { email, fname, lname, telephone, message } = req.body;
+    if (!email) {
+      return res.send({ error: "Email is required" });
+    }
+    if (!fname) {
+      return res.send({ error: "First name is required" });
+    }
+    if (!lname) {
+      return res.send({ error: "last name is required" });
+    }
+    if (!telephone) {
+      return res.send({ error: "Telephone is required" });
+    }
+    if (!message) {
+      return res.send({ error: "Message is required" });
+    }
+    // check user
+    const existingUser = await UserContact.findOne({ email });
+
+    // existingUser user
+    if (existingUser) {
+      return res.status(400).send({
+        success: false,
+        message: "Email already exists",
+      });
+    }
+
+    const newUser = await new UserContact({
+      email,
+      fname,
+      lname,
+      telephone,
+      message,
+    }).save();
+
+    res.status(201).send({
+      success: true,
+      message: "Contact submitted successfully",
+      newUser,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Failed to submit contact",
+      error,
+    });
+  }
+};
+
+export const deleteContactController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await UserContact.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "Review not found",
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: "Review Deleted Successfully",
+      user,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "error while deleting Review",
       error,
     });
   }

@@ -149,6 +149,7 @@ const ReviewPage = () => {
               sx={{
                 textAlign: "center",
                 fontSize: { xs: "16px", sm: "32px", md: "48px" },
+                fontWeight: 700,
                 position: "relative",
                 zIndex: 1,
               }}

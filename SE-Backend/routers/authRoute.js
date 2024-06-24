@@ -9,6 +9,9 @@ import {
   getUploadController,
   getUploadPhotoController,
   deleteUploadController,
+  getContactController,
+  submitContactController,
+  deleteContactController,
 } from "../controllers/authController.js";
 import multer from "multer";
 
@@ -23,21 +26,27 @@ const router = express.Router();
 // LOGIN || METHOD GET
 router.post("/register", registerController);
 router.post("/login", loginController);
+
+// Review
 router.post("/review", submitReviewController);
 
-// GET route to fetch all reviews
 router.get("/reviews", getReviewController);
 
-//delete
 router.delete("/delete-review/:id", deleteReviewController);
 
-router.post("/upload", upload.single("photo"), submitUploadController);
-
+// Upload
 router.get("/uploads", getUploadController);
 
 router.get("/upload/photo/:id", getUploadPhotoController);
 
-//delete
+router.post("/upload", upload.single("photo"), submitUploadController);
+
 router.delete("/delete-customer/:id", deleteUploadController);
 
+// Contact
+router.get("/contacts", getContactController);
+
+router.post("/contact", submitContactController);
+
+router.delete("/delete-contact/:id", deleteContactController);
 export default router;

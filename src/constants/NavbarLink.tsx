@@ -15,4 +15,8 @@ export const MainDashboardTab = [
     name: "REVIEW",
     path: "/review",
   },
+  {
+    name: "CONTACT",
+    path: "/contact",
+  },
 ];

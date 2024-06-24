@@ -20,30 +20,31 @@ import TableContainer from "@mui/material/TableContainer";
 import { TablePagination } from "@mui/material";
 
 // PROJECT IMPORTS
-import { useAuth } from "@/context/AuthContext/authContext";
 import ContainerV2 from "../UIComponent/ContainerV2";
+import { useAuth } from "@/context/AuthContext/authContext";
 import { HeadlinePink } from "../ReviewPage/Common.styled";
 import UINewTypography from "../UIComponent/UINewTypography";
 import {
   ViewPageMainContainer,
   ViewPageContainer,
   ViewPageIcon,
-} from "./ViewPage.styled";
+} from "../ViewPage/ViewPage.styled";
 
-// TYPES
-import { CategoryType } from "@/constants/category.constants";
-
-interface CategoryData {
+export interface Contact {
   _id: string;
-  category: string;
-  photo?: string;
+  fname: string;
+  lname: string;
+  email: string;
+  telephone: number;
+  message: string;
+  createdAt: string;
 }
 
-const ViewPage = () => {
+const ContactListPage = () => {
   const { push } = useRouter();
 
   const { isAuthenticated, logout } = useAuth();
-  const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
+  const [contacts, setContact] = useState<Contact[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -64,9 +65,9 @@ const ViewPage = () => {
   const fetchCustomers = async () => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/contacts`
       );
-      setCategoryData(res.data.customerList);
+      setContact(res.data.reviewsList);
     } catch (error) {
       console.error("Failed to fetch customers", error);
     }
@@ -75,18 +76,13 @@ const ViewPage = () => {
   const handleDelete = async (id: string) => {
     try {
       const res = await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/delete-customer/${id}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/delete-contact/${id}`
       );
       toast.success(res.data.message);
       fetchCustomers();
     } catch (error) {
       console.error("Failed to delete customer", error);
     }
-  };
-
-  const getCategoryName = (id: string): string => {
-    const category = CategoryType.find((cat) => cat.id === id);
-    return category ? category.name : "Unknown Category";
   };
 
   useEffect(() => {
@@ -109,7 +105,7 @@ const ViewPage = () => {
               variant="h4"
               sx={{ textAlign: "center", color: "text.secondary" }}
             >
-              Category List
+              Contact List
             </UINewTypography>
             <HeadlinePink />
             <ViewPageIcon>
@@ -130,17 +126,20 @@ const ViewPage = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>#</TableCell>
-                    <TableCell align="right">Category</TableCell>
-                    <TableCell align="right">Photo</TableCell>
-                    <TableCell align="right">Actions</TableCell>
+                    <TableCell align="right">First Name</TableCell>
+                    <TableCell align="right">last Name</TableCell>
+                    <TableCell align="center">Email</TableCell>
+                    <TableCell align="right">Telephone</TableCell>
+                    <TableCell align="center">Message</TableCell>
+                    <TableCell align="center">Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {categoryData
+                  {contacts
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((cust, index) => (
                       <TableRow
-                        key={cust._id}
+                        key={index}
                         sx={{
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
@@ -148,28 +147,13 @@ const ViewPage = () => {
                         <TableCell component="th" scope="row">
                           {page * rowsPerPage + index + 1}
                         </TableCell>
-                        <TableCell component="th" align="right">
-                          {getCategoryName(cust.category)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {cust.photo ? (
-                            <Box
-                              component="img"
-                              src={`http://localhost:8080/api/v1/auth/upload/photo/${cust._id}`}
-                              style={{
-                                maxWidth: "100px",
-                                maxHeight: "100px",
-                              }}
-                              onError={(e: any) => {
-                                e.target.onerror = null;
-                                e.target.src = "/path/to/fallback/image.jpg";
-                              }}
-                            />
-                          ) : (
-                            <span>No Photo</span>
-                          )}
-                        </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="right">{cust.fname}</TableCell>
+                        <TableCell align="right">{cust.lname}</TableCell>
+                        <TableCell align="center">{cust.email}</TableCell>
+                        <TableCell align="center">{cust.telephone}</TableCell>
+                        <TableCell align="center">{cust.message}</TableCell>
+
+                        <TableCell align="center">
                           <IconButton onClick={() => handleDelete(cust._id)}>
                             <DeleteIcon sx={{ color: "white.main" }} />
                           </IconButton>
@@ -182,7 +166,7 @@ const ViewPage = () => {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={categoryData.length}
+              count={contacts.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
@@ -195,4 +179,4 @@ const ViewPage = () => {
   );
 };
 
-export default ViewPage;
+export default ContactListPage;
