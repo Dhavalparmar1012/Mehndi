@@ -21,9 +21,9 @@ import { TablePagination } from "@mui/material";
 
 // PROJECT IMPORTS
 import { useAuth } from "@/context/AuthContext/authContext";
-import ContainerV2 from "../UIComponent/ContainerV2";
-import { HeadlinePink } from "../ReviewPage/Common.styled";
-import UINewTypography from "../UIComponent/UINewTypography";
+import ContainerV2 from "../../UIComponent/ContainerV2";
+import { HeadlinePink } from "../../ReviewPage/Common.styled";
+import UINewTypography from "../../UIComponent/UINewTypography";
 import {
   ViewPageMainContainer,
   ViewPageContainer,

@@ -3,7 +3,7 @@ import SEOLayout from "@/layouts/SEOLayout";
 import NoSsr from "@mui/material/NoSsr";
 
 const ViewContactPage = dynamic(
-  () => import("@/components/ContactListPage/index"),
+  () => import("@/components/Admin/ContactListPage/index"),
   {
     ssr: false,
   }

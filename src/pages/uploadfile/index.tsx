@@ -2,9 +2,12 @@ import dynamic from "next/dynamic";
 import SEOLayout from "@/layouts/SEOLayout";
 import NoSsr from "@mui/material/NoSsr";
 
-const UploadFilePage = dynamic(() => import("@/components/UploadImage/index"), {
-  ssr: false,
-});
+const UploadFilePage = dynamic(
+  () => import("@/components/Admin/UploadImage/index"),
+  {
+    ssr: false,
+  }
+);
 
 const UploadPageContainer = () => (
   <SEOLayout>

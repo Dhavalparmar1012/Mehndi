@@ -46,6 +46,9 @@ export interface Review {
 
 const ReviewPage = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const reviewsPerPage = 5;
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -92,7 +95,7 @@ const ReviewPage = () => {
       );
       if (res && res.data.success) {
         toast.success(res.data.message);
-        fetchReviews();
+        fetchReviews(currentPage);
         resetForm();
       } else {
         toast.error(res.data.message || "Submission failed");
@@ -104,20 +107,35 @@ const ReviewPage = () => {
     setSubmitting(false);
   };
 
-  const fetchReviews = async () => {
+  const fetchReviews = async (page: number) => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews`,
+        {
+          params: {
+            page,
+            limit: reviewsPerPage,
+          },
+        }
       );
       setReviews(res.data.reviewsList);
+      setTotalPages(Math.ceil(res.data.totalReviews / reviewsPerPage));
     } catch (error) {
       console.error("Failed to fetch reviews", error);
     }
   };
 
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
   useEffect(() => {
-    fetchReviews();
-  }, []);
+    fetchReviews(currentPage);
+  }, [currentPage]);
 
   return (
     <>
@@ -358,6 +376,30 @@ const ReviewPage = () => {
                   </UINewTypography>
                 )}
               </ReviewViewMainContainer>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  mt: 2,
+                }}
+              >
+                <Button
+                  onClick={handlePreviousPage}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </Button>
+                <UINewTypography variant="bodyLargeBold">
+                  Page {currentPage} of {totalPages}
+                </UINewTypography>
+                <Button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </Button>
+              </Box>
             </MainContainerSpace>
           </ContainerV2>
         </MainLayout>

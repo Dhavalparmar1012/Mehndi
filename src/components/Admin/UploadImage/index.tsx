@@ -16,12 +16,15 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 
 // PROJECT IMPORTS
-import InputText from "../UIComponent/InputText";
-import ContainerV2 from "../UIComponent/ContainerV2";
-import { HeadlinePink } from "../ReviewPage/Common.styled";
-import UINewTypography from "../UIComponent/UINewTypography";
-import { StyledSelect } from "../UIComponent/StyleSelect";
-import { ReviewFormButton, ReviewFormField } from "../ReviewPage/Review.styled";
+import InputText from "../../UIComponent/InputText";
+import ContainerV2 from "../../UIComponent/ContainerV2";
+import { HeadlinePink } from "../../ReviewPage/Common.styled";
+import UINewTypography from "../../UIComponent/UINewTypography";
+import { StyledSelect } from "../../UIComponent/StyleSelect";
+import {
+  ReviewFormButton,
+  ReviewFormField,
+} from "../../ReviewPage/Review.styled";
 import { useAuth } from "@/context/AuthContext/authContext";
 import {
   UploadMainContainer,

@@ -3,7 +3,7 @@ import SEOLayout from "@/layouts/SEOLayout";
 import NoSsr from "@mui/material/NoSsr";
 
 const ViewReviewPage = dynamic(
-  () => import("@/components/ViewReviewPage/index"),
+  () => import("@/components/Admin/ViewReviewPage/index"),
   {
     ssr: false,
   }

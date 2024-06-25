@@ -1,7 +1,6 @@
 //IMPORT MUI
 import React from "react";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import Scrollbars from "react-custom-scrollbars-2";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
@@ -14,15 +13,12 @@ import MainLayout from "@/layouts/MainLayout/MainDashboardLayout";
 import MyCarousel from "./MyCarousel";
 import ContainerV2 from "../UIComponent/ContainerV2";
 import UINewTypography from "../UIComponent/UINewTypography";
-import {
-  InformationLayoutContainer,
-  MehndiServiceMainContainer,
-  MehndiServiceTitle,
-} from "./HomePage.styled";
-import { HeadlinePink, MainContainerSpace } from "../ReviewPage/Common.styled";
-import { ReviewTitleMainContainer } from "../ReviewPage/Review.styled";
-import ContactForm from "../ContactPage/ContactForm";
+import { MainContainerSpace } from "../ReviewPage/Common.styled";
+import { InformationLayoutContainer } from "./HomePage.styled";
+import ServiceMenu from "./ServiceMenu";
 import ReviewStatus from "./ReviewStatus";
+import Service from "./Service";
+import ContactForm from "../ContactPage/ContactForm";
 import ScrollToTopIcons from "./ScrollToTopIcons";
 
 const HomePage = () => {
@@ -92,58 +88,8 @@ const HomePage = () => {
           <ContainerV2>
             <MainContainerSpace>
               <MyCarousel />
-              <Grid container spacing={10}>
-                <Grid item xs={12} sm={4} md={4} lg={4}>
-                  <MehndiServiceMainContainer>
-                    <UINewTypography
-                      variant="h3"
-                      sx={{
-                        color: "#6488ea",
-                        textAlign: "center",
-                      }}
-                    >
-                      Home Services
-                    </UINewTypography>
-                    <MehndiServiceTitle>
-                      At Mehandi Creation, We also provide home service. We have
-                      female mehndi artist who will come your home to fill aroma
-                      of mehndi to any festival or event.
-                    </MehndiServiceTitle>
-                  </MehndiServiceMainContainer>
-                </Grid>
-                <Grid item xs={12} sm={4} md={4} lg={4}>
-                  <MehndiServiceMainContainer>
-                    <UINewTypography
-                      variant="h3"
-                      textAlign="center"
-                      color="#6488ea"
-                    >
-                      Female Staff
-                    </UINewTypography>
-                    <MehndiServiceTitle>
-                      At Mehandi Creation, Female mehandi artist are available
-                      to fill colors with mehandi into your events. Our artist
-                      are specialised in tradisnal as well as modern.
-                    </MehndiServiceTitle>
-                  </MehndiServiceMainContainer>
-                </Grid>
-                <Grid item xs={12} sm={4} md={4} lg={4}>
-                  <MehndiServiceMainContainer>
-                    <UINewTypography
-                      variant="h3"
-                      textAlign="center"
-                      color="#6488ea"
-                    >
-                      Great Designs
-                    </UINewTypography>
-                    <MehndiServiceTitle>
-                      At Mehandi Creation we understand our clients requirment
-                      and merging that with our ideas. To convert your dream
-                      design into reality is our priority.
-                    </MehndiServiceTitle>
-                  </MehndiServiceMainContainer>
-                </Grid>
-              </Grid>
+
+              <ServiceMenu />
 
               <Box
                 sx={{
@@ -215,24 +161,7 @@ const HomePage = () => {
 
               <ReviewStatus />
 
-              <ReviewTitleMainContainer>
-                <UINewTypography
-                  variant="h2"
-                  textAlign="center"
-                  color="#6488ea"
-                >
-                  Services
-                </UINewTypography>
-                <HeadlinePink />
-                <UINewTypography variant="SubtitleLargeBold">
-                  I can do Mehndi/Henna for just about any occasion. I
-                  Specialize in Bridal Mehndi, Sangeet Parties, Engagements,
-                  Baby Showers, Birthday Parties, Ladies Night outs, School
-                  Events, Corporate Events and Fundraisers. I love to extend
-                  this art form onto cakes and other mediums like wood, glass
-                  and candles.
-                </UINewTypography>
-              </ReviewTitleMainContainer>
+              <Service />
 
               <ContactForm />
 

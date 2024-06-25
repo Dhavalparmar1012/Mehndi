@@ -157,8 +157,16 @@ export const submitReviewController = async (req, res) => {
 
 export const getReviewController = async (req, res) => {
   try {
-    const reviewsList = await DetailsUser.find(req.query);
-    res.status(200).json({ reviewsList, nbHits: reviewsList.length });
+    const { page = 1, limit = 5 } = req.query;
+    const skip = (page - 1) * limit;
+
+    const reviewsList = await DetailsUser.find()
+      .skip(skip)
+      .limit(parseInt(limit));
+
+    const totalReviews = await DetailsUser.countDocuments();
+
+    res.status(200).json({ reviewsList, totalReviews });
   } catch (error) {
     res.status(500).send({
       success: false,

@@ -13,15 +13,15 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 // PROJECT IMPORTS
 import { useAuth } from "@/context/AuthContext/authContext";
-import UINewTypography from "../UIComponent/UINewTypography";
-import InputText from "../UIComponent/InputText";
+import UINewTypography from "../../UIComponent/UINewTypography";
+import InputText from "../../UIComponent/InputText";
 import LoginLayout from "@/layouts/LoginLayout";
 import {
   LoginPageMainContainer,
   LoginContainer,
   LoginFieldContainer,
 } from "./Login.styled";
-import StyleButton from "../UIComponent/StyleButton";
+import StyleButton from "../../UIComponent/StyleButton";
 
 const LoginPage = () => {
   const { push } = useRouter();

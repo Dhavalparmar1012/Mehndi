@@ -52,6 +52,9 @@ export const ReviewViewMainContainer = styled(Box)(() => ({
 export const ReviewRatingContainer = styled(Box)(() => ({
   display: "flex",
   gap: theme.spacing(1),
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+  },
 }));
 
 export const ReviewDividerContainer = styled(Box)(() => ({

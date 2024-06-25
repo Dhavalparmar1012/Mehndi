@@ -1,4 +1,4 @@
 export type MultipleOptions = {
-  id: number | string | boolean;
+  id: number | string;
   name: string;
 };

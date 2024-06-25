@@ -20,10 +20,10 @@ import TableContainer from "@mui/material/TableContainer";
 import { TablePagination } from "@mui/material";
 
 // PROJECT IMPORTS
-import ContainerV2 from "../UIComponent/ContainerV2";
+import ContainerV2 from "../../UIComponent/ContainerV2";
 import { useAuth } from "@/context/AuthContext/authContext";
-import { HeadlinePink } from "../ReviewPage/Common.styled";
-import UINewTypography from "../UIComponent/UINewTypography";
+import { HeadlinePink } from "../../ReviewPage/Common.styled";
+import UINewTypography from "../../UIComponent/UINewTypography";
 import {
   ViewPageMainContainer,
   ViewPageContainer,

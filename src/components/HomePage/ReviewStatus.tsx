@@ -144,7 +144,7 @@ const ReviewStatus = () => {
                       src="/images/user.jpg"
                       sx={{
                         width: "100%",
-                        maxWidth: { xs: "50px", sm: "100px", md: "160px" },
+                        maxWidth: { xs: "70px", sm: "100px", md: "160px" },
                         height: "auto",
                       }}
                     />
